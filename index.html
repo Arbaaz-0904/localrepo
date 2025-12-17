@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbaaz Pasha - Embedded Systems Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #f0f0f0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, rgba(255, 165, 0, 0.3) 50%, transparent 100%);
+            pointer-events: none;
+            transform: scale(0);
+            animation: ripple-animation 0.8s ease-out;
+            z-index: 9999;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Particle Effect */
+        .particle {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: #FFD700;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 10px #FFD700;
+        }
+
+        /* Click Flash Effect */
+        @keyframes flash {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 0 30px rgba(255, 215, 0, 0);
+            }
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            color: #FFD700;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
+            border: 2px solid #FFD700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        header:active {
+            transform: scale(0.98);
+            animation: flash 0.5s ease-out;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            color: #FFD700;
+            transition: all 0.3s;
+        }
+
+        header:hover h1 {
+            transform: scale(1.05);
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+        }
+
+        header .tagline {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #f0f0f0;
+        }
+
+        header .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        header .contact-info a {
+            color: #000;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header .contact-info a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        header .contact-info a:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        header .contact-info a:hover {
+            background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        header .contact-info a:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        /* Main Content Card */
+        .content-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            border: 1px solid #FFD700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .content-card:active {
+            transform: scale(0.98);
+            animation: flash 0.5s ease-out;
+        }
+
+        h2 {
+            color: #FFD700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #FFD700;
+            padding-bottom: 10px;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        h2:hover {
+            transform: translateX(10px);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        h2:active {
+            transform: scale(1.1);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #f0f0f0;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2);
+            border: 2px solid #FFD700;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+            border-radius: 50%;
+        }
+
+        .skill-category:active::before {
+            width: 500px;
+            height: 500px;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+            border-color: #FFA500;
+        }
+
+        .skill-category:active {
+            transform: scale(0.95);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
+            color: #FFD700;
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover h3 {
+            color: #FFA500;
+            transform: scale(1.05);
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #f0f0f0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .skill-category li:hover {
+            color: #FFD700;
+            transform: translateX(10px);
+        }
+
+        .skill-category li:active {
+            transform: scale(1.1) translateX(15px);
+        }
+
+        .skill-category li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .skill-category li:hover:before {
+            color: #FFA500;
+            transform: scale(1.3);
+        }
+
+        /* Experience Section */
+        .experience-item {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #FFD700;
+            border-radius: 8px;
+            transition: all 0.4s;
+            box-shadow: 0 3px 15px rgba(255, 215, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .experience-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+            transition: width 0.4s;
+        }
+
+        .experience-item:hover::after {
+            width: 100%;
+        }
+
+        .experience-item:hover {
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+            transform: translateX(15px) scale(1.02);
+            border-left-width: 8px;
+        }
+
+        .experience-item:active {
+            transform: translateX(10px) scale(0.98);
+            animation: flash 0.5s ease-out;
+        }
+
+        .experience-item h3 {
+            color: #FFD700;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover h3 {
+            color: #FFA500;
+            transform: translateX(5px);
+        }
+
+        .experience-item .company {
+            color: #FFA500;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .experience-item .duration {
+            color: #b0b0b0;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .experience-item ul {
+            margin-left: 20px;
+        }
+
+        .experience-item li {
+            margin-bottom: 10px;
+            color: #d0d0d0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .experience-item li:hover {
+            color: #FFD700;
+            transform: translateX(5px);
+        }
+
+        .experience-item li:active {
+            transform: scale(1.05) translateX(10px);
+        }
+
+        /* Projects Highlight */
+        .project-highlight {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            color: #f0f0f0;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s;
+        }
+
+        .project-highlight:active::before {
+            transform: scale(1);
+        }
+
+        .project-highlight:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+            border-color: #FFA500;
+        }
+
+        .project-highlight:active {
+            transform: scale(0.98);
+        }
+
+        .project-highlight h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: #FFD700;
+            transition: all 0.3s;
+        }
+
+        .project-highlight:hover h3 {
+            color: #FFA500;
+            transform: scale(1.05);
+        }
+
+        .project-highlight p {
+            color: #d0d0d0;
+        }
+
+        .project-highlight strong {
+            color: #FFA500;
+        }
+
+        /* Tech Stack Icons */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tech-badge {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 3px 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-badge::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .tech-badge:active::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-5px) scale(1.1) rotate(3deg);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+        }
+
+        .tech-badge:active {
+            transform: scale(0.9);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #FFD700;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        footer:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5);
+        }
+
+        footer:active {
+            transform: scale(0.98);
+            animation: flash 0.5s ease-out;
+        }
+
+        footer p {
+            color: #f0f0f0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-card {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        /* Glow Effects */
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        header {
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        /* Shake Animation */
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Arbaaz Pasha</h1>
+            <p class="tagline">Embedded Systems Engineer | IoT & Cloud Solutions Architect</p>
+            <p>🚀 8051 | STM32 | ESP32 | C | UART | I2C | SPI | Linux | AWS</p>
+            <div class="contact-info">
+                <a href="mailto:arbaazpasha04@gmail.com">📧 Email</a>
+                <a href="https://www.linkedin.com/in/arbaaz-pasha" target="_blank">💼 LinkedIn</a>
+                <a href="#">📍 Hyderabad, India</a>
+            </div>
+        </header>
+
+        <!-- Professional Summary -->
+        <div class="content-card">
+            <h2>💡 Professional Summary</h2>
+            <p style="font-size: 1.1em; margin-top: 20px; line-height: 1.8;">
+                Embedded Systems Engineer with proven expertise in building low-level, high-performance systems.
+                Specialized in microcontroller programming (8051, ATmega328P, STM32, ESP32, LPC1768) and Linux system
+                programming with hands-on experience in real-time embedded development. Skilled in hardware-software
+                integration, PCB design, and IoT solutions with proficiency in AWS cloud services for scalable system
+                deployment.
+            </p>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="content-card">
+            <h2>🔧 Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🔌 Embedded Systems</h3>
+                    <ul>
+                        <li>8051, STM32, ESP32, LPC1768</li>
+                        <li>ATmega328P, Raspberry Pi</li>
+                        <li>UART, I2C, SPI, ADC</li>
+                        <li>Timers & Interrupts</li>
+                        <li>PWM & Motor Control</li>
+                        <li>Sensor Integration</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>💻 Programming</h3>
+                    <ul>
+                        <li>C & Embedded C</li>
+                        <li>Python</li>
+                        <li>Dart/Flutter</li>
+                        <li>Bash Scripting</li>
+                        <li>Data Structures & Algorithms</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>🛠️ Tools & IDEs</h3>
+                    <ul>
+                        <li>Keil, Proteus</li>
+                        <li>STM32CubeIDE</li>
+                        <li>KiCad (PCB Design)</li>
+                        <li>VS Code</li>
+                        <li>Git & GitHub</li>
+                        <li>Docker</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>☁️ Cloud & Systems</h3>
+                    <ul>
+                        <li>AWS (EC2, S3, RDS, IAM)</li>
+                        <li>Linux System Programming</li>
+                        <li>Socket Programming</li>
+                        <li>Process Management & IPC</li>
+                        <li>Device Driver Basics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Experience -->
+        <div class="content-card">
+            <h2>💼 Professional Experience</h2>
+
+            <div class="experience-item">
+                <div class="company">Cerebral Works Private Limited</div>
+                <h3>Embedded Software Engineer</h3>
+                <div class="duration">July 2025 - October 2025 (4 months) | Hyderabad, India</div>
+                <ul>
+                    <li>Designed comprehensive motor control system integrating hardware circuit design with mobile app
+                        development for wireless motor speed regulation</li>
+                    <li>Configured UART serial communication between STM32 microcontroller and HM-10 Bluetooth module
+                        for real-time motor control using PWM</li>
+                    <li>Architected 4-layer PCB layout using KiCad with dedicated power/ground planes for signal
+                        integrity optimization</li>
+                    <li>Engineered sensor integration system utilizing ADXL345 accelerometer, DS18B20 temperature
+                        sensor, and FSR 406 force sensor</li>
+                    <li>Programmed STM32 firmware integrating I2C, 1-Wire protocol, and force detection protocols</li>
+                    <li>Developed battery monitoring system using internal ADC with real-time percentage calculation
+                        algorithms</li>
+                    <li>Collaborated with cross-functional team to deploy Flutter-based mobile application for real-time
+                        data transmission</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="company">FalconX Electro Technologies Pvt Ltd</div>
+                <h3>Embedded System Engineer</h3>
+                <div class="duration">August 2024 - May 2025 (10 months) | Hyderabad, India</div>
+                <ul>
+                    <li>Gained hands-on experience in embedded systems development and microcontroller programming</li>
+                    <li>Worked with 8051, ATmega328P, ESP32, STM32, and LPC1768 microcontrollers for various embedded
+                        applications</li>
+                    <li>Installed and configured OS on Raspberry Pi 3, 4 and worked with Raspberry Pi Pico for GPIO
+                        control</li>
+                    <li>Developed expertise in Linux system programming: system calls, process management, IPC</li>
+                    <li>Learned networking fundamentals, socket programming, and basics of Linux kernel architecture
+                    </li>
+                    <li>Implemented Data Structures & Algorithms in C for embedded applications</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="company">Research Centre Imarat (RCI) • DRDO</div>
+                <h3>Internship Trainee</h3>
+                <div class="duration">January 2024 - March 2024 (3 months) | Hyderabad</div>
+                <ul>
+                    <li>Gained exposure to defense-grade embedded systems and aerospace applications</li>
+                    <li>Learned industry best practices for hardware-software integration in critical systems</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Key Projects -->
+        <div class="content-card">
+            <h2>🚀 Key Project Highlights</h2>
+
+            <div class="project-highlight">
+                <h3>🔋 Wireless Motor Control with IoT Integration</h3>
+                <p><strong>Tech Stack:</strong> STM32, HM-10 Bluetooth, Flutter, KiCad PCB Design</p>
+                <p style="margin-top: 10px;">Developed complete motor control ecosystem with 4-layer PCB design, mobile
+                    app interface,
+                    and multi-sensor integration (ADXL345, DS18B20, FSR 406). Implemented UART communication protocol
+                    and
+                    battery monitoring with real-time percentage calculation.</p>
+            </div>
+
+            <div class="project-highlight">
+                <h3>🌡️ Multi-Protocol Sensor System</h3>
+                <p><strong>Tech Stack:</strong> STM32, I2C, 1-Wire, ADC, Embedded C</p>
+                <p style="margin-top: 10px;">Engineered real-time environmental monitoring system integrating multiple
+                    communication
+                    protocols for accelerometer, temperature, and force sensing with optimized power management.</p>
+            </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="content-card">
+            <h2>⚡ Technology Stack</h2>
+            <div class="tech-stack">
+                <span class="tech-badge">C/C++</span>
+                <span class="tech-badge">Embedded C</span>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">STM32</span>
+                <span class="tech-badge">ESP32</span>
+                <span class="tech-badge">8051</span>
+                <span class="tech-badge">Raspberry Pi</span>
+                <span class="tech-badge">UART/I2C/SPI</span>
+                <span class="tech-badge">AWS</span>
+                <span class="tech-badge">Linux</span>
+                <span class="tech-badge">Docker</span>
+                <span class="tech-badge">Git/GitHub</span>
+                <span class="tech-badge">KiCad</span>
+                <span class="tech-badge">Flutter</span>
+                <span class="tech-badge">FreeRTOS</span>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="content-card">
+            <h2>🎓 Education</h2>
+            <div class="experience-item">
+                <h3>Bachelor of Technology - Electrical and Electronics Engineering</h3>
+                <div class="company">Sri Indu College Of Engineering & Technology</div>
+                <div class="duration">July 2022 - July 2024</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <h3 style="margin-bottom: 15px;">Ready to Build Innovative Embedded Solutions</h3>
+            <p>🎯 Available for Immediate Joining | Open to Embedded Systems & IoT Roles</p>
+            <p style="margin-top: 20px;">© 2025 Arbaaz Pasha | Embedded Systems Engineer</p>
+        </footer>
+    </div>
+
+    <script>
+        // Ripple Effect on Click
+        document.addEventListener('click', function (e) {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.width = ripple.style.height = '100px';
+            ripple.style.left = e.clientX - 50 + 'px';
+            ripple.style.top = e.clientY - 50 + 'px';
+            document.body.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 800);
+        });
+
+        // Particle Explosion on Click
+        document.addEventListener('click', function (e) {
+            for (let i = 0; i < 12; i++) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            document.body.appendChild(particle);
+
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = 2 + Math.random() * 4;
+            const life = 60;
+            let frame = 0;
+
+            function animate() {
+                frame++;
+                const progress = frame / life;
+                const distance = velocity * frame;
+
+                particle.style.left = (x + Math.cos(angle) * distance) + 'px';
+                particle.style.top = (y + Math.sin(angle) * distance - frame * 2) + 'px';
+                particle.style.opacity = 1 - progress;
+                particle.style.transform = `scale(${1 - progress})`;
+
+                if (frame < life) {
+                    requestAnimationFrame(animate);
+                } else {
+                    particle.remove();
+                }
+            }
+            animate();
+        }
+
+        // Shake animation on double click
+        document.querySelectorAll('.skill-category, .experience-item, .project-highlight').forEach(element => {
+            element.addEventListener('dblclick', function () {
+                this.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 500);
+            });
+        });
+
+        // Pulse animation for tech badges on click
+        document.querySelectorAll('.tech-badge').forEach(badge => {
+            badge.addEventListener('click', function (e) {
+                e.stopPropagation();
+                this.style.animation = 'pulse 0.5s';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 500);
+            });
+        });
+
+        // Add sound effect simulation (visual feedback)
+        document.querySelectorAll('h2').forEach(heading => {
+            heading.addEventListener('click', function () {
+                this.style.transform = 'scale(1.2) rotate(5deg)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Smooth scroll enhancement
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
